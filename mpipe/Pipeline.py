@@ -25,3 +25,6 @@ class Pipeline(object):
             result = self.get()
             if result is None: break
             yield result
+
+    def shutdown(self):
+        self._input_stage.join()
