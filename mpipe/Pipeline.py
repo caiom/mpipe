@@ -10,6 +10,7 @@ class Pipeline(object):
         self._default_start_method = multiprocessing.get_start_method()
         multiprocessing.set_start_method(process_start_method, True)
         self._input_stage.build()
+        multiprocessing.set_start_method(self._default_start_method, True)
 
     def put(self, task):
         """Put *task* on the pipeline."""
@@ -31,4 +32,3 @@ class Pipeline(object):
 
     def shutdown(self):
         self._input_stage.join()
-        multiprocessing.set_start_method(self._default_start_method, True)
